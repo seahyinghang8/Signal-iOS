@@ -27,7 +27,7 @@ jobs:
           pytest --cov=todo --cov-report=xml
 
       - name: Python Coverage Testgen
-        uses: seahyinghang8/coverage-testgen@v5.0
+        uses: seahyinghang8/coverage-testgen@v5.1
         with:
           coverageFile: coverage.xml
           token: ${{ secrets.GITHUB_TOKEN }}
