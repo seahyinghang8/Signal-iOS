@@ -931,10 +931,11 @@ public class GroupsV2Impl: GroupsV2, Dependencies {
         avatarUrlPath: String,
         groupV2Params: GroupV2Params
     ) async throws -> Data {
-        // We throw away decrypted avatars larger than `kMaxEncryptedAvatarSize`.
+        // Add 100 bytes of slush -- nonce, tag, protobuf overhead, padding, etc.
+        // We throw away decrypted avatars larger than `kMaxAvatarSize`.
         let operation = GroupsV2AvatarDownloadOperation(
             urlPath: avatarUrlPath,
-            maxDownloadSize: kMaxEncryptedAvatarSize
+            maxDownloadSize: kMaxAvatarSize + 100
         )
         let promise = operation.promise
         avatarDownloadQueue.addOperation(operation)

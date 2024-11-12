@@ -287,7 +287,8 @@ public extension GroupV2Params {
             var blobBuilder = GroupsProtoGroupAttributeBlob.builder()
             blobBuilder.setContent(GroupsProtoGroupAttributeBlobOneOfContent.avatar(value))
             let blobData = try blobBuilder.buildSerializedData()
-            return try encryptBlob(blobData)
+            let encryptedTimerData = try encryptBlob(blobData)
+            return encryptedTimerData
         } catch {
             owsFailDebug("Error: \(error)")
             throw error
