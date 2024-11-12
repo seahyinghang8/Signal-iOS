@@ -14,5 +14,10 @@ class ZkGroupIntegrationTest: XCTestCase {
                          "The zkgroup server public parameters have changed!")
     }
 
-
+    func testEncryptedAvatarMaximumLength() throws {
+        let decryptedAvatar = Data(count: Int(kMaxAvatarSize))
+        let groupParams = try GroupV2Params(groupSecretParams: .generate())
+        let encryptedAvatar = try groupParams.encryptGroupAvatar(decryptedAvatar)
+        XCTAssertEqual(encryptedAvatar.count, Int(kMaxEncryptedAvatarSize))
+    }
 }
